@@ -5,4 +5,4 @@ authors = ["Ilya Epifanov <elijah.epifanov@gmail.com>"]
 
 [dependencies]
 regex = "0.2.5"
-clap = "2.29.2"
+clap = { version = "2.29.2", default-features = false, features = ["suggestions", "vec_map"] }
