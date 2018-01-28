@@ -17,9 +17,14 @@ main() {
 
     test -f Cargo.lock || cargo generate-lockfile
 
+    SUFFIX=""
+    if [[ $TARGET =~ .*-windows-.* ]]; then
+        SUFFIX=".exe"
+    fi
+
     cross rustc --bin betaflight-blackbox-splitter --target $TARGET --release -- -C lto
 
-    cp target/$TARGET/release/betaflight-blackbox-splitter $stage/
+    cp target/$TARGET/release/betaflight-blackbox-splitter$SUFFIX $stage/
 
     cd $stage
     tar czf $src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz *
