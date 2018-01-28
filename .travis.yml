@@ -1,0 +1,73 @@
+# Based on the "trust" template v0.1.2
+# https://github.com/japaric/trust/tree/v0.1.2
+
+dist: trusty
+language: rust
+services: docker
+sudo: required
+
+env:
+  global:
+    - CRATE_NAME=betaflight-blackbox-splitter
+
+matrix:
+  include:
+    # Linux
+    - env: TARGET=arm-unknown-linux-gnueabi
+      rust: nightly
+    - env: TARGET=armv7-unknown-linux-gnueabihf
+      rust: nightly
+    - env: TARGET=i686-unknown-linux-gnu
+      rust: nightly
+    - env: TARGET=x86_64-unknown-linux-gnu
+      rust: nightly
+
+    # OSX
+    - env: TARGET=x86_64-apple-darwin
+      os: osx
+      rust: nightly
+
+    # Windows
+    - env: TARGET=i686-pc-windows-gnu
+      rust: nightly
+    - env: TARGET=x86_64-pc-windows-gnu
+      rust: nightly
+
+before_install:
+  - set -e
+  - rustup self update
+
+install:
+  - sh ci/install.sh
+  - source ~/.cargo/env || true
+
+script:
+  - bash ci/script.sh
+
+after_script: set +e
+
+before_deploy:
+  - sh ci/before_deploy.sh
+
+deploy:
+  api_key:
+    secure: Q6FqQSZNJ+VLIAuwNgz+kCZsGt7MN58LxtAALyiDinEa25GJ2vsExyRkmljkAB49F7rkzSqnfR1oEI+YKLA90QK4EiwPHrhjYuWyHb7WCQab7orHqsijUeAmi4sNPCjFtkmfrS9l+sD9QcDqmcDOMaBzNAaJ47DyE5urWLLSa4JSXcrgCBmM6niToGIsa6p3EKLulZocL8x4Dtx15LaIZJbtyYr+Ajdjz1RGx7IzIgpuOGURanUWX6HNUwJek7YHh+5Kpr3PEal/wEI8f7NTIFM2bEbc70DRkzgb9Fj33AAllXA1/BJK4IKUF0HNGv8K0InPF4DujGMHMvps1HNFDIxVsaGbQQb8O9GBiMEvm26FuzsUyTFj1SRxvvsmrc/DBqZKn5VU8U8Csm/SscXOI5b7YTciu4sELmUbzfN2XppQGQSGQKHeHHziUtEUgf2niimwrDWCAsgYlZDG+zZ4CllPFeNm+Jx4kf6qMO+zo7L3eV5QlEfANdFvTvtL28DjPgbKnOOuriUDzNCi4aXW5I8Nt6rr+Ml+0HNZLR5MFp30FUNhF0GWa/UpQWjF4pCj3CqTe4yGj3jb5jhWlAaPk+5+PNq7pIX6Kvmo8/3SGMqlekIUeT2SRIrbY7MZk1JTysflUpbZ5EI4M/i45aXqSkb3P7EK8XmU7hwrF64mK5g=
+  file_glob: true
+  file: $CRATE_NAME-$TRAVIS_TAG-$TARGET.*
+  on:
+    tags: true
+  provider: releases
+  skip_cleanup: true
+
+cache: cargo
+before_cache:
+  - chmod -R a+r $HOME/.cargo
+
+branches:
+  only:
+    - /^v\d+\.\d+\.\d+.*$/
+    - master
+
+notifications:
+  email:
+    on_success: never

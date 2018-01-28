@@ -1,0 +1,8 @@
+[package]
+name = "betaflight-blackbox-splitter"
+version = "0.1.0"
+authors = ["Ilya Epifanov <elijah.epifanov@gmail.com>"]
+
+[dependencies]
+regex = "0.2.5"
+clap = "2.29.2"
