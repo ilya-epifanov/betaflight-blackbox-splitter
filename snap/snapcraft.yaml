@@ -1,0 +1,21 @@
+name: bfbb-split
+version: git
+summary: Betaflight blackbox onboard flash log file splitter
+description: |
+  Split the betaflight blackbox logs written to the onboard flash to make 
+  them readable by blackbox explorer
+
+grade: devel
+confinement: strict
+
+apps:
+  bfbb-split:
+    command: betaflight-blackbox-splitter
+    plugs:
+      - home
+
+parts:
+  bfbb-split:
+    source: .
+    plugin: rust
+    rust-channel: nightly
