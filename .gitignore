@@ -1,5 +1,6 @@
 /target/
 *.snap
+*.snap-build
 *.tar.bz2
 parts/
 prime/
