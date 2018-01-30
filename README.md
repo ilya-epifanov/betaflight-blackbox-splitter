@@ -1,9 +1,9 @@
-# Betaflight blackbox log file splitter
+ |# Betaflight blackbox log file splitter
 
 ## Build status
 
 | Snapcraft | [![Snap Status](https://build.snapcraft.io/badge/ilya-epifanov/betaflight-blackbox-splitter.svg)](https://build.snapcraft.io/user/ilya-epifanov/betaflight-blackbox-splitter)|
---- | --- | ---
+-- | --
 | Travis | [![Linux and MacOS build status](https://travis-ci.org/ilya-epifanov/betaflight-blackbox-splitter.svg?branch=master)](https://travis-ci.org/ilya-epifanov/betaflight-blackbox-splitter)|
 | Appveyor | [![Windows build status](https://ci.appveyor.com/api/projects/status/mtq4w3fd6dqqglcg/branch/master?svg=true)](https://ci.appveyor.com/project/ilya-epifanov/betaflight-blackbox-splitter/branch/master)|
 
