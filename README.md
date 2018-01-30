@@ -11,7 +11,7 @@
 
 ## Snap-enabled Linux installations
 
-If you have `snapd` installed (by default on Ubuntu and derivatives), you can install it from snapcraft.io global store.
+If you have `snapd` installed (by default on Ubuntu and derivatives), you can install the tool from snapcraft.io global store.
 
 ```
 snap install bfbb-split
