@@ -1,4 +1,4 @@
- |# Betaflight blackbox log file splitter
+# Betaflight blackbox log file splitter
 
 ## Build status
 
